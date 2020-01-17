@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="MusicWord.Views.LevelTwoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MusicWord.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="..\Images\BackGround.jpeg" Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Label x:Name="Category" FontSize="40" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Snow" Grid.Column="1" Grid.ColumnSpan="2"></Label>
+        <Label x:Name="HiddenWord" FontSize="30" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Black" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1"></Label>
+        <Viewbox   Grid.Row="1" Grid.Column="3" VerticalAlignment="Top">
+            <StackPanel Orientation="Vertical" Width="400" >
+                <TextBlock 
+                   x:Name="Guesses"
+                   FontSize="50" 
+                   TextWrapping="Wrap" 
+                   Foreground="Black"
+                    />
+            </StackPanel>
+        </Viewbox>
+        <TextBox x:Name="GuessWord" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Top" TextAlignment="Center" FontSize="20"  Height="55"/>
+        <Label x:Name="Time" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" FontSize="25" FontWeight="Bold" Foreground="Red"  Height="60"/>
+        <Label Content="Score:"  Grid.Row="3" Grid.Column="3" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Foreground="Red"  Height="60"/>
+        <Label x:Name="Score"  Grid.Row="3" Grid.Column="3" VerticalAlignment="Bottom" FontSize="25" FontWeight="Bold" Foreground="Red"  Height="60"/>
+
+        <Label Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="25" FontWeight="Bold" Foreground="DarkBlue" Content="Guessed Letters:" Height="60"/>
+        <Button x:Name="CheckWord" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top" Height="55" Width="180" Background="Aquamarine" >
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock FontSize="30" TextAlignment="Center" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">Check Word</TextBlock>
+            </StackPanel>
+        </Button>
+       
+        <Button x:Name="GetClue" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="40" Width="180" Background="Yellow" >
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock   FontSize="30" TextAlignment="Center" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">Get clue</TextBlock>
+            </StackPanel>
+        </Button>
+        <Viewbox Grid.Row="2" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Column="2">
+            <StackPanel Orientation="Vertical" Width="400" >
+                <TextBlock x:Name="Clue"
+                   FontSize="30" 
+                   TextWrapping="Wrap" 
+                   Foreground="Black"/>
+            </StackPanel>
+        </Viewbox>
+            
+        
+        <ItemsControl   x:Name="GuessesSymbols"  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Polygon Fill="Yellow" Margin="0,0,20,0" x:Name="FirstLetter" Visibility="{Binding ToShow}" Stroke="Red"    StrokeThickness="2" StrokeLineJoin="Round" Width="50" Height="50"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Stretch="Fill" Points="9,2 11,7 17,7 12,10 14,15 9,12 4,15 6,10 1,7 7,7" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+        
+        <ItemsControl   x:Name="CluesSymbols"  Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Ellipse Fill="Yellow" Visibility="{Binding ToShow}" Margin="0,0,20,0" Height="50" Width="50" StrokeThickness="2" Stroke="Red" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+        <Button x:Name="CheckLetter" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" Height="55" Width="180" Background="Aquamarine" Command="{Binding CheckWordCommand}">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock  FontSize="30" TextAlignment="Center" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">Check letter</TextBlock>
+            </StackPanel>
+        </Button>
+        <TextBox x:Name="LetterGuess"  Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Top" TextAlignment="Center" FontSize="20" Height="55" />
+        <Label x:Name="NoLetters" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"   VerticalAlignment="Bottom" FontSize="25" FontWeight="Bold" Foreground="Red"  Height="60"/>
+
+
+    </Grid>
+</UserControl>
