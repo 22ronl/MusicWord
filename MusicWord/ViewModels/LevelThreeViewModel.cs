@@ -17,7 +17,7 @@ namespace MusicWord.ViewModels
 			_timer.PropertyChanged += _timer_PropertyChanged;
 			int score = PlayerModel.Instance.Score;
 			BaseLevelModel game = new BaseLevelModel(word, _timer, Globals.hidddenPercentage, score);
-			baseBuilder(game, score);
+			baseBuilder(game, score, word);
 			game.PropertyChanged += _game_PropertyChanged;
 			game.GameOver += _game_GameOver;
 			game.start();

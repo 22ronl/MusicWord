@@ -28,7 +28,7 @@ namespace MusicWord.ViewModels
 			_game.PropertyChanged += _game_PropertyChanged;
 			_game.GameOver += _game_GameOver;
 			_game.start();
-			baseBuilder(_game, score);
+			baseBuilder(_game, score,word);
 		}
 
 		public override void _game_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

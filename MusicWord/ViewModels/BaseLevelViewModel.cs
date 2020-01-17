@@ -21,11 +21,12 @@ namespace MusicWord.ViewModels
 		public BaseLevelViewModel()
 		{
 		}
-		protected void baseBuilder(BaseLevelModel game, int score)
+		protected void baseBuilder(BaseLevelModel game, int score, string word)
 		{
 			Score = score;
 			_game = game;
-			Category = "Category: " + PlayerModel.Instance.Category;
+			Category = Globals.categoryText + PlayerModel.Instance.Category;
+			PlayerModel.Instance.lastWord = word;
 		}
 
 

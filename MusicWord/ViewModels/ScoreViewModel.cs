@@ -12,6 +12,7 @@ namespace MusicWord.ViewModels
 		public ScoreViewModel()
 		{
 			Score = PlayerModel.Instance.Score;
+			HiddenWord = Globals.hiddenWordText + PlayerModel.Instance.lastWord;
 		}
 		public int  Score
 		{
@@ -26,6 +27,8 @@ namespace MusicWord.ViewModels
 		{
 			NextScreen();
 		}
+
+		public string HiddenWord { get; set; }
 
 	}
 }

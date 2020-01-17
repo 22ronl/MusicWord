@@ -12,6 +12,7 @@ namespace MusicWord.Models
         private string _name;
         private string _category;
         private int _score;
+        public string lastWord;
         private HashSet<string> played_words = new HashSet<string>();
         private PlayerModel() 
         {
