@@ -98,7 +98,7 @@ namespace MusicWord.Models
 			foreach (var letter in this._word)
 			{
 				if (letter == ' ')
-					wordString += "  ";
+					wordString += "   ";
 				else if (this._guesses.Contains(Char.ToLower(letter)) || !Char.IsLetter(letter))
 					wordString += letter + " ";
 				else
@@ -114,13 +114,13 @@ namespace MusicWord.Models
 
 		public void EnterWord(string word)
 		{
-			if (word == this._word)
+			if (word.ToLower() == this._word.ToLower())
 			{
 				Score += Globals.wordScore;
 				gameOver();
 			}
 		}
-
+			
 		protected void gameOver()
 		{
 			Score += _timer.Secondes * Globals.secondsScore;

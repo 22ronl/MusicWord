@@ -23,7 +23,17 @@
             <ImageBrush ImageSource="..\Images\BackGround.jpeg" Stretch="UniformToFill"/>
         </Grid.Background>
         <Label x:Name="Category" FontSize="40" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Snow" Grid.Column="1" Grid.ColumnSpan="2"></Label>
-        <Label x:Name="HiddenWord" FontSize="30" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Black" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1"></Label>
+        
+        <Viewbox   Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Top">
+            <StackPanel Orientation="Vertical" Width="400" >
+                <TextBlock 
+                   x:Name="HiddenWord"
+                   FontSize="20" 
+                   TextWrapping="Wrap" 
+                   Foreground="Black"
+                    />
+            </StackPanel>
+        </Viewbox>
         <Viewbox   Grid.Row="1" Grid.Column="3" VerticalAlignment="Top">
             <StackPanel Orientation="Vertical" Width="400" >
                 <TextBlock 

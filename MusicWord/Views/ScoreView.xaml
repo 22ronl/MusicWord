@@ -30,7 +30,6 @@
             <StackPanel Orientation="Vertical" Width="57" >
                 <TextBlock 
                    x:Name="HiddenWord"
-
                    FontSize="3"
                    TextWrapping="Wrap" 
                    Foreground="Snow"
