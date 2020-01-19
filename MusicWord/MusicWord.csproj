@@ -82,17 +82,23 @@
     <Compile Include="Models\PlayerModel.cs" />
     <Compile Include="Models\SongModel.cs" />
     <Compile Include="Models\SQLServerModel.cs" />
+    <Compile Include="Models\TableEntry.cs" />
     <Compile Include="Models\TimeModel.cs" />
     <Compile Include="ViewModels\BaseLevelViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\FinalScoreViewModel.cs" />
     <Compile Include="ViewModels\LevelOneViewModel.cs" />
     <Compile Include="ViewModels\LevelThreeViewModel.cs" />
     <Compile Include="ViewModels\LevelTwoViewModel.cs" />
+    <Compile Include="ViewModels\ScoreTableViewModel.cs" />
     <Compile Include="ViewModels\ScoreViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\WelcomeViewModel.cs" />
     <Compile Include="Views\CategoryView.xaml.cs">
       <DependentUpon>CategoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FinalScoreView.xaml.cs">
+      <DependentUpon>FinalScoreView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LevelOneView.xaml.cs">
       <DependentUpon>LevelOneView.xaml</DependentUpon>
@@ -102,6 +108,9 @@
     </Compile>
     <Compile Include="Views\LevelTwoView.xaml.cs">
       <DependentUpon>LevelTwoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ScoreTableView.xaml.cs">
+      <DependentUpon>ScoreTableView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ScoreView.xaml.cs">
       <DependentUpon>ScoreView.xaml</DependentUpon>
@@ -146,6 +155,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\FinalScoreView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LevelOneView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -155,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LevelTwoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ScoreTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -32,7 +32,8 @@ namespace MusicWord.ViewModels
         private void createGameScreens()
         {
             List<GetScreen> list = new List<GetScreen> { ()=> new CategoryViewModel() ,
-                () => new LevelOneViewModel() , ()=> new ScoreViewModel(),
+                () => new LevelOneViewModel() , ()=> new ScoreViewModel(), ()=> new FinalScoreViewModel(),
+                () => new ScoreTableViewModel(),
                 () => new LevelTwoViewModel(Globals.maxClues, Globals.maxLetterGuesses), ()=> new ScoreViewModel(),
                 () => new LevelThreeViewModel() , ()=> new ScoreViewModel() };
             _screens = new Queue<GetScreen>(list);
