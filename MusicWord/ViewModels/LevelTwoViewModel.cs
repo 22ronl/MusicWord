@@ -103,7 +103,7 @@ namespace MusicWord.ViewModels
             }
             else if(_lastSymbolIndexClues >= 0)
             {
-                base.GetClue();
+                base.getClue();
                 CluesSymbols[_lastSymbolIndexClues].hide();
                 _lastSymbolIndexClues -= 1;
             }

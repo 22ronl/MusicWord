@@ -87,6 +87,7 @@
     <Compile Include="ViewModels\BaseLevelViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\FinalScoreViewModel.cs" />
+    <Compile Include="ViewModels\InstructionsGuideViewModel.cs" />
     <Compile Include="ViewModels\LevelOneViewModel.cs" />
     <Compile Include="ViewModels\LevelThreeViewModel.cs" />
     <Compile Include="ViewModels\LevelTwoViewModel.cs" />
@@ -99,6 +100,9 @@
     </Compile>
     <Compile Include="Views\FinalScoreView.xaml.cs">
       <DependentUpon>FinalScoreView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InstructionsGuideView.xaml.cs">
+      <DependentUpon>InstructionsGuideView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LevelOneView.xaml.cs">
       <DependentUpon>LevelOneView.xaml</DependentUpon>
@@ -156,6 +160,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FinalScoreView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InstructionsGuideView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

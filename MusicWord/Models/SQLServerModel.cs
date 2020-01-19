@@ -50,6 +50,7 @@ namespace MusicWord.Models
 
         public static ICategory getWord(string category)
         {
+            
             PlayerModel player = PlayerModel.Instance;
             Instance();
             connect();

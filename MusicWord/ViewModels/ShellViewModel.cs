@@ -31,11 +31,12 @@ namespace MusicWord.ViewModels
         private Queue<GetScreen> _screens;
         private void createGameScreens()
         {
-            List<GetScreen> list = new List<GetScreen> { ()=> new CategoryViewModel() ,
-                () => new LevelOneViewModel() , ()=> new ScoreViewModel(), ()=> new FinalScoreViewModel(),
-                () => new ScoreTableViewModel(),
+            List<GetScreen> list = new List<GetScreen> { ()=> new CategoryViewModel() , ()=> new InstructionsGuideViewModel(),
+                () => new LevelOneViewModel() , ()=> new ScoreViewModel(), 
                 () => new LevelTwoViewModel(Globals.maxClues, Globals.maxLetterGuesses), ()=> new ScoreViewModel(),
-                () => new LevelThreeViewModel() , ()=> new ScoreViewModel() };
+                () => new LevelThreeViewModel() , ()=> new ScoreViewModel(),
+                ()=> new FinalScoreViewModel(),
+                () => new ScoreTableViewModel(),};
             _screens = new Queue<GetScreen>(list);
         }
         public  GetScreen getNextScreen()

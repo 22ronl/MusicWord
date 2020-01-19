@@ -18,6 +18,7 @@ namespace MusicWord.ViewModels
 		private BaseLevelModel _game;
 		protected CluesModel _cluesGenrator;
 		protected string _clue;
+		protected int _numOfClues;
 		public BaseLevelViewModel()
 		{
 		}
@@ -27,6 +28,7 @@ namespace MusicWord.ViewModels
 			_game = game;
 			Category = Globals.categoryText + PlayerModel.Instance.Category;
 			PlayerModel.Instance.lastWord = word;
+			_numOfClues = 0;
 		}
 
 
@@ -84,13 +86,27 @@ namespace MusicWord.ViewModels
 				NotifyOfPropertyChange(() => Clue);
 			}
 		}
-
-		public virtual void GetClue()
+		protected void getClue()
 		{
 			string clue = _cluesGenrator.getClue();
 			Clue = clue;
 		}
-
+		public virtual void GetClue()
+		{
+			if(_numOfClues < Globals.maxCluesBase)
+			{
+				getClue();
+				_numOfClues++;
+			}
+			else if (Clue != Globals.noClues)
+			{
+				Clue = Globals.noClues;
+			}
+		}
+		public void Cheat()
+		{
+			GuessWord = PlayerModel.Instance.lastWord;
+		}
 		public void CheckWord()
 		{
 			if (!String.IsNullOrEmpty(GuessWord))

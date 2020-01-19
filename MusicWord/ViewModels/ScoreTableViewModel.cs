@@ -15,7 +15,6 @@ namespace MusicWord.ViewModels
         public ScoreTableViewModel()
         {
             ScoreTable = new BindableCollection<TableEntry>(SQLServerModel.getScoreTable());
-            Console.WriteLine("kaka");
         }
     }
 }

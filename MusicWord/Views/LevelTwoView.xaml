@@ -44,7 +44,7 @@
                     />
             </StackPanel>
         </Viewbox>
-        <TextBox x:Name="GuessWord" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Top" TextAlignment="Center" FontSize="20"  Height="55"/>
+        <TextBox x:Name="GuessWord" TextWrapping="Wrap" AcceptsReturn="True" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" VerticalAlignment="Top" TextAlignment="Center" FontSize="15"  Height="55"/>
         <Label x:Name="Time" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" FontSize="25" FontWeight="Bold" Foreground="Red"  Height="60"/>
         <Label Content="Score:"  Grid.Row="3" Grid.Column="3" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Foreground="Red"  Height="60"/>
         <Label x:Name="Score"  Grid.Row="3" Grid.Column="3" VerticalAlignment="Bottom" FontSize="25" FontWeight="Bold" Foreground="Red"  Height="60"/>
@@ -101,9 +101,13 @@
                 <TextBlock  FontSize="30" TextAlignment="Center" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">Check letter</TextBlock>
             </StackPanel>
         </Button>
-        <TextBox x:Name="LetterGuess"  Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Top" TextAlignment="Center" FontSize="20" Height="55" />
+        <TextBox x:Name="LetterGuess"  Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1" VerticalAlignment="Top" TextAlignment="Center" FontSize="25" Height="55" />
         <Label x:Name="NoLetters" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"   VerticalAlignment="Bottom" FontSize="25" FontWeight="Bold" Foreground="Red"  Height="60"/>
-
+        <Button x:Name="Cheat" Grid.Column="3" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="40" Width="100" Background="Yellow" >
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock   FontSize="30" TextAlignment="Center" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">Cheat</TextBlock>
+            </StackPanel>
+        </Button>
 
     </Grid>
 </UserControl>

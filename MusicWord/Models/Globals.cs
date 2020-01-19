@@ -19,6 +19,7 @@ namespace MusicWord.Models
         public static string noClues = "No clues left";
         public static string hiddenWordText = "The hidden word was: ";
         public static string categoryText = "Category: ";
+        public static int maxCluesBase = 10;
         public static int letterScore = 50;
         public static int wordScore = 200;
         public static int secondsScore = 10;
