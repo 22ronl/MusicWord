@@ -19,5 +19,6 @@ namespace MusicWord
         {
             DisplayRootViewFor<ShellViewModel>();
         }
+
     }
 }

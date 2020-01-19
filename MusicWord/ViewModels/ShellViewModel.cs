@@ -29,15 +29,16 @@ namespace MusicWord.ViewModels
         public delegate Screen GetScreen();
         private static ShellViewModel _instance;
         private Queue<GetScreen> _screens;
+        private List<GetScreen> _levels;
         private void createGameScreens()
         {
-            List<GetScreen> list = new List<GetScreen> { ()=> new CategoryViewModel() , ()=> new InstructionsGuideViewModel(),
+            _levels = new List<GetScreen> { ()=> new CategoryViewModel() , ()=> new InstructionsGuideViewModel(),
                 () => new LevelOneViewModel() , ()=> new ScoreViewModel(), 
                 () => new LevelTwoViewModel(Globals.maxClues, Globals.maxLetterGuesses), ()=> new ScoreViewModel(),
                 () => new LevelThreeViewModel() , ()=> new ScoreViewModel(),
                 ()=> new FinalScoreViewModel(),
                 () => new ScoreTableViewModel(),};
-            _screens = new Queue<GetScreen>(list);
+            _screens = new Queue<GetScreen>(_levels);
         }
         public  GetScreen getNextScreen()
         {
@@ -46,6 +47,11 @@ namespace MusicWord.ViewModels
                 return _screens.Dequeue();
             }
             return null;
+        }
+        public void playAgain()
+        {
+            _screens = new Queue<GetScreen>(_levels);
+            PlayerModel.Instance.Score = 0;
         }
         public ShellViewModel()
         {

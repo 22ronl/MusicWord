@@ -23,22 +23,24 @@ namespace MusicWord.Models
             //atrist clues
             _queries_map.Add("artists", new List<string>());
             _queries_map["artists"].Add("SELECT name FROM songs WHERE {cur_artist_id} = songs.artist ORDER BY rand() LIMIT 1;");
-            _queries_map["artists"].Add("SELECT birthday FROM artists WHERE {cur_artist_id} = artists.id ORDER BY rand() LIMIT 1;");
-            _queries_map["artists"].Add("SELECT country FROM artists WHERE {cur_artist_id} = artists.id ORDER BY rand() LIMIT 1;");
-            _queries_map["artists"].Add("SELECT gender FROM artists WHERE {cur_artist_id} = artists.id ORDER BY rand() LIMIT 1;");
+            _queries_map["artists"].Add("SELECT birthday FROM artists WHERE {cur_artist_id} = artists.id LIMIT 1;");
+            _queries_map["artists"].Add("SELECT country FROM artists WHERE {cur_artist_id} = artists.id LIMIT 1;");
+            _queries_map["artists"].Add("SELECT gender FROM artists WHERE {cur_artist_id} = artists.id LIMIT 1;");
             _queries_map["artists"].Add("SELECT name FROM albums WHERE {cur_artist_id} = albums.artist ORDER BY rand() LIMIT 1;");
 
             //songs clues
             _queries_map.Add("songs", new List<string>());
-            _queries_map["songs"].Add("SELECT name FROM albums WHERE {cur_song_album_id} = albums.id ORDER BY rand() LIMIT 1;");
-            _queries_map["songs"].Add("SELECT name FROM artists WHERE {cur_song_artist_id} = artists.id ORDER BY rand() LIMIT 1;");
+            _queries_map["songs"].Add("SELECT name FROM albums WHERE {cur_song_album_id} = albums.id LIMIT 1;");
+            _queries_map["songs"].Add("SELECT name FROM artists WHERE {cur_song_artist_id} = artists.id LIMIT 1;");
             _queries_map["songs"].Add("SELECT name FROM songs WHERE {cur_song_album_id} = songs.album AND {cur_song_id} != songs.id ORDER BY rand() LIMIT 1;");
 
             //albums clues
             _queries_map.Add("albums", new List<string>());
-            _queries_map["albums"].Add("SELECT name FROM artists WHERE {cur_album_artist_id} = artists.id ORDER BY rand() LIMIT 1;");
-            _queries_map["albums"].Add("SELECT year FROM albums WHERE {cur_album_id} = albums.id ORDER BY rand() LIMIT 1;");
+            _queries_map["albums"].Add("SELECT name FROM artists WHERE {cur_album_artist_id} = artists.id LIMIT 1;");
+            _queries_map["albums"].Add("SELECT year FROM albums WHERE {cur_album_id} = albums.id LIMIT 1;");
             _queries_map["albums"].Add("SELECT name FROM albums WHERE {cur_album_artist_id} = albums.artist AND albums.id != {cur_album_id} ORDER BY rand() LIMIT 1;");
+            _queries_map["albums"].Add("SELECT name FROM songs WHERE {cur_album_id} = songs.album ORDER BY rand() LIMIT 1;");
+
         }
 
         public string getClue()
@@ -49,7 +51,7 @@ namespace MusicWord.Models
             int index = rand.Next(_queries_map[category].Count);
             string query = _queries_map[category][index];
             string newQuery = toReplace(category, query);
-            string connectionString = "SERVER = localhost; DATABASE=musicword; UID= root; PASSWORD=035342770Rl";
+            string connectionString =Globals.connectionString;
             string query_answer = SQLServerModel.getClueString(connectionString, newQuery);
             if (query_answer == null)
             {

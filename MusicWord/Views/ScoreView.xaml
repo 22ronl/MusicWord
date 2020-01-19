@@ -25,18 +25,15 @@
             <ImageBrush ImageSource="..\Images\BackGround.jpeg" Stretch="UniformToFill"/>
         </Grid.Background>
         <Label Content="Your score: " FontSize="49" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="Snow" Grid.Column="1" Grid.ColumnSpan="2"></Label>
-        <Label x:Name="Score"   FontSize="45" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="Snow" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="4"></Label>
-        <Viewbox    Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="6"  >
-            <StackPanel Orientation="Vertical" Width="57" >
-                <TextBlock 
-                   x:Name="HiddenWord"
-                   FontSize="3"
-                   TextWrapping="Wrap" 
-                   Foreground="Snow"
-                   FontWeight="Bold"
-                    />
-            </StackPanel>
-        </Viewbox>
+        <Label x:Name="Score"   FontSize="45" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="Snow" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="3"></Label>
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="5" Grid.RowSpan="3" x:Name="HiddenWord" FontSize="30" TextWrapping="Wrap" Foreground="Snow" FontWeight="Bold" />
+                   
+                   
+                   
+                   
+                    
+
+
         <Button x:Name="Next" Grid.Column="5" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="40" Width="180" Background="Yellow" >
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock   FontSize="30" TextAlignment="Center" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">next</TextBlock>

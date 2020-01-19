@@ -56,7 +56,11 @@
         </ItemsControl>
 
 
-        
 
+        <Button x:Name="PlayAgain" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" Width="180" Background="Aquamarine" >
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock  FontSize="20" TextAlignment="Center" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">Play Again</TextBlock>
+            </StackPanel>
+        </Button>
     </Grid>
 </UserControl>
