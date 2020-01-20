@@ -13,7 +13,7 @@ namespace MusicWord.ViewModels
 			ICategory category = SQLServerModel.getWord(PlayerModel.Instance.Category);
 			_cluesGenrator = new CluesModel(category);
 			string word = category.Name;
-			_timer = new TimeModel(100);
+			_timer = new TimeModel(Globals.levelTime);
 			_timer.PropertyChanged += _timer_PropertyChanged;
 			int score = PlayerModel.Instance.Score;
 			BaseLevelModel game = new BaseLevelModel(word, _timer, Globals.hidddenPercentage, score);

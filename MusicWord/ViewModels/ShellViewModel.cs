@@ -37,7 +37,8 @@ namespace MusicWord.ViewModels
                 () => new LevelTwoViewModel(Globals.maxClues, Globals.maxLetterGuesses), ()=> new ScoreViewModel(),
                 () => new LevelThreeViewModel() , ()=> new ScoreViewModel(),
                 ()=> new FinalScoreViewModel(),
-                () => new ScoreTableViewModel(),};
+                () => new ScoreTableViewModel(),
+                ()=> new FinalPageViewModel()};
             _screens = new Queue<GetScreen>(_levels);
         }
         public  GetScreen getNextScreen()

@@ -19,6 +19,9 @@ namespace MusicWord.ViewModels
 		}
 		public void Start()
 		{
+			///<summary>
+			///
+			///</summary>
 			if (!string.IsNullOrEmpty(PlayerName))
 			{
                 PlayerModel newPlayer = PlayerModel.Instance;

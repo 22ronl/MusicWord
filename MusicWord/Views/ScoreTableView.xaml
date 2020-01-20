@@ -57,9 +57,9 @@
 
 
 
-        <Button x:Name="PlayAgain" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="35" Width="180" Background="Aquamarine" >
+        <Button x:Name="Next" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="40" Width="180" Background="Yellow" >
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock  FontSize="20" TextAlignment="Center" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">Play Again</TextBlock>
+                <TextBlock   FontSize="30" TextAlignment="Center" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">next</TextBlock>
             </StackPanel>
         </Button>
     </Grid>

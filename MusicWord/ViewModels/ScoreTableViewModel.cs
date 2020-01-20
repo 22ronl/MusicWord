@@ -18,9 +18,8 @@ namespace MusicWord.ViewModels
         {
             ScoreTable = new BindableCollection<TableEntry>(SQLServerModel.getScoreTable());
         }
-        public void PlayAgain()
+        public void Next()
         {
-            ShellViewModel.Instance.playAgain();
             NextScreen();
         }
     }

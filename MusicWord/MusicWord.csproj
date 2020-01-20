@@ -86,6 +86,7 @@
     <Compile Include="Models\TimeModel.cs" />
     <Compile Include="ViewModels\BaseLevelViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\FinalPageViewModel.cs" />
     <Compile Include="ViewModels\FinalScoreViewModel.cs" />
     <Compile Include="ViewModels\InstructionsGuideViewModel.cs" />
     <Compile Include="ViewModels\LevelOneViewModel.cs" />
@@ -97,6 +98,9 @@
     <Compile Include="ViewModels\WelcomeViewModel.cs" />
     <Compile Include="Views\CategoryView.xaml.cs">
       <DependentUpon>CategoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FinalPageView.xaml.cs">
+      <DependentUpon>FinalPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FinalScoreView.xaml.cs">
       <DependentUpon>FinalScoreView.xaml</DependentUpon>
@@ -156,6 +160,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\CategoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FinalPageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -9,7 +9,7 @@ namespace MusicWord.Models
     static class Globals
     {
         public static string errorMessage = "Error: enter your name";
-        public static int levelTime = 60;
+        public static int levelTime = 100;
         public static double hidddenPercentage = 0.40;
         public static string connectionString = "SERVER = localhost; DATABASE=musicword; UID= root; PASSWORD=matan1623724";
         public static string hiddenWord = "HiddenWord";
