@@ -8,7 +8,11 @@ namespace MusicWord.ViewModels
 {
     class LevelThreeViewModel : BaseLevelViewModel
     {
-        public LevelThreeViewModel()
+		/// <summary>Class <c>LevelThreeViewModel</c>
+		/// Create the game calss with needed parameters
+		/// using BaseLevelViewModel
+		/// </summary>
+		public LevelThreeViewModel()
         {
 			ICategory category = SQLServerModel.getWord(PlayerModel.Instance.Category);
 			_cluesGenrator = new CluesModel(category);

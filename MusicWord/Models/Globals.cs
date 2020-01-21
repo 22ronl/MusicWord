@@ -26,7 +26,7 @@ namespace MusicWord.Models
         public static int letterScore = 50;
         public static int wordScore = 200;
         public static int secondsScore = 10;
-        public static int maxClues = 3;
+        public static int maxClues = 5;
         public static int maxLetterGuesses = 5;
     }
 }

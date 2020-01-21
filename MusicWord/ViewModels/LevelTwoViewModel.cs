@@ -11,8 +11,14 @@ namespace MusicWord.ViewModels
 {
     class LevelTwoViewModel : LevelOneViewModel
     {
+        /// <summary>Class <c>LevelTwoViewModel</c>
+        /// Adding restriction on numbers of clues and letter guesses
+        /// </summary>
         public class ShowIteam : PropertyChangedBase
         {
+            /// <summary>Class <c>ShowIteam</c>
+            /// inner class to hide or show view object
+            /// </summary>
             private string _toShow;
             public ShowIteam()
             {
@@ -60,6 +66,9 @@ namespace MusicWord.ViewModels
         }
         public override void CheckLetter()
         {
+            /// <summary>
+            /// Check if the letter is correct and hide one symobl from the screen
+            /// </summary>
             bool toEmpty = false;
             if(!String.IsNullOrEmpty(LetterGuess))
             {
@@ -77,11 +86,11 @@ namespace MusicWord.ViewModels
                     NoLetters = Globals.noLetters;
                 }
             }
+            // empty the text box of the letter
             if (toEmpty)
             {
                 LetterGuess = "";
             }
-
         }
         private string _noLetters;
 
@@ -97,6 +106,7 @@ namespace MusicWord.ViewModels
 
         public override void GetClue()
         {
+            // show to player that there are no more clues
             if(_lastSymbolIndexClues < 0 && Clue != Globals.noClues)
             {
                 Clue = Globals.noClues;
@@ -104,6 +114,7 @@ namespace MusicWord.ViewModels
             else if(_lastSymbolIndexClues >= 0)
             {
                 base.getClue();
+                // hide symobl after right guess 
                 CluesSymbols[_lastSymbolIndexClues].hide();
                 _lastSymbolIndexClues -= 1;
             }
