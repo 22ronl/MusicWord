@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace MusicWord.Models
 {
+    /// <summary>
+    /// Class <c>CluesModel</c> responsable on creating clues queries stock.
+    /// and components the string clues in run time.
+    /// </summary>
     class CluesModel
     {
         private SortedDictionary<string, List<string>> _queries_map = new SortedDictionary<string, List<string>>();
         private ICategory _icategory;
         private HashSet<string> usedClues;
+        /// <summary>method <c>CluesModel</c> constructour, init the queirs stock and used clues set</summary>
         public CluesModel(ICategory icategory)
         {
             init_queries_map();
@@ -18,6 +23,8 @@ namespace MusicWord.Models
             usedClues = new HashSet<string>();
         }
 
+        /// <summary>method <c>init_queries_map</c>responsable for init the queirs stock, 
+        /// the words insine the curly brackets will be replaced in run time</summary>
         private void init_queries_map()
         {
             //atrist clues
@@ -43,6 +50,7 @@ namespace MusicWord.Models
 
         }
 
+        /// <summary>method <c>getClue</c> responsiable on componinting the clue the returns the preperd string to show</summary>
         public string getClue()
         {
             PlayerModel newPlayer = PlayerModel.Instance;
@@ -58,6 +66,7 @@ namespace MusicWord.Models
                 return getClue();
             }
             string answer = completeClueString(newQuery, query_answer);
+            // if the clue is already used.
             if (usedClues.Contains(answer))
             {
                 return getClue();
@@ -66,6 +75,7 @@ namespace MusicWord.Models
             return answer;
         }
 
+        /// <summary>method <c>completeClueString</c> responsiable to component the return answer from query to relevent string</summary>
         private string completeClueString(string query, string clueAnswer)
         {
             if (query.Contains("name"))
@@ -117,6 +127,8 @@ namespace MusicWord.Models
             return null;
         }
 
+        /// <summary>method <c>completeClueString</c> responsiable on replacing the curly brackets with the relevant
+        /// information for ICategory instance</summary>
         private string toReplace(string category, string query)
         {
             string newQuery = null;
@@ -135,7 +147,6 @@ namespace MusicWord.Models
                     {
                         newQuery = query.Replace("{cur_song_artist_id}", song.ArtistId.ToString());
                     }
-
                     break;
                 case "artists":
                     ArtistModel art = (ArtistModel)_icategory;
