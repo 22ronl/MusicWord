@@ -11,8 +11,8 @@ namespace MusicWord.Models
     class TimeModel : PropertyChangedBase
 	{
 		/// <summary>Class <c>TimeModel</c>
-		/// keep track of the game time and update the game each seconed 
-		/// and when the time is over
+		/// keep track of the game time and update the game ViewModel each seconed 
+		/// and the game when time is over
 		/// </summary>
 		public event EventHandler TimeOver;
 		private int _secondes;

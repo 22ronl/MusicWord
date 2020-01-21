@@ -12,12 +12,17 @@ namespace MusicWord.ViewModels
 {
 	class LevelOneViewModel : BaseLevelViewModel
 	{
+		/// <summary>Class <c>BaseLevelViewModel</c>
+		/// Create the game calss with needed parameters
+		/// adding guesses letters functionality 
+		/// </summary>
 
 		protected string _letterGuess;
 		protected string _guesses;
 		protected LevelOneModel _game;
 		public LevelOneViewModel()
 		{
+			// get the hidden word
 			ICategory category = SQLServerModel.getWord(PlayerModel.Instance.Category);
 			_cluesGenrator = new CluesModel(category);
 			string word = category.Name;
