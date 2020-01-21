@@ -8,6 +8,9 @@ namespace MusicWord.Models
 {
     static class Globals
     {
+        /// <summary>Class <c>Globals</c>
+        /// Saving all global varibles needed for the game
+        /// </summary>
         public static string errorMessage = "Error: enter your name";
         public static int levelTime = 100;
         public static double hidddenPercentage = 0.40;
