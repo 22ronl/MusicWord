@@ -8,7 +8,6 @@ namespace MusicWord.Models
 {
     static class Globals
     {
-
         /// <summary>Class <c>Globals</c>
         /// Saving all global varibles needed for the game
         /// </summary>

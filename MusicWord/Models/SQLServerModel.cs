@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using MySql.Data.MySqlClient;
 namespace MusicWord.Models
 {
@@ -13,67 +15,67 @@ namespace MusicWord.Models
     class SQLServerModel
     {
         // coonection object to the database
-        private static MySqlConnection _connention = null;
+        private MySqlConnection _connention;
         // the singleton instance member
         private static SQLServerModel _instance = null;
         /// <summary>
         /// private constructor
         /// </summary>
-        private SQLServerModel() { }
+        private SQLServerModel() 
+        {
+            connect();
+        }
         
         /// <summary>
-        /// function to get the singleton instance
-        /// <returns> the class instance </returns>
+        /// the singleton instance property
         /// </summary>
-        public static SQLServerModel Instance()
+        public static  SQLServerModel Instance
         {
-            if (_instance == null)
+            get
             {
-                _instance = new SQLServerModel();
+                if (_instance == null)
+                {
+                    _instance = new SQLServerModel();
+                }
+                return _instance;
             }
-            return _instance;
         }
 
         /// <summary>
         /// function that makes the connection to the database 
         /// </summary>
-        public static void connect()
+        public void connect()
         {
-            // if there is no open connection create one
-            if (_connention == null || _connention.State != System.Data.ConnectionState.Open)
+            try
             {
-                if (_connention != null)
-                {
-                    // close the taken connection and open a new one
-                    _connention.Close();
-                    _connention = new MySqlConnection(Globals.connectionString);
-                    _connention.Open();
-                }
-                else
-                {
-                    // open a new connection
-                    _connention = new MySqlConnection(Globals.connectionString);
-                    _connention.Open();
-                }
+                _connention = new MySqlConnection(Globals.connectionString);
+                _connention.Open();
+            }
+            catch (MySqlException)
+            {
+                MessageBox.Show("Connection Failed");
             }
         }
+        
+        
 
         /// <summary>
         /// sends the query to the database
         /// </summary>
         /// <param name="sqlCommand"></param>
-        public static void connectSQLServer(string sqlCommand)
+        public void connectSQLServer(string sqlCommand)
         {
-            // use this class instance
-            Instance();
-            // connect to the database
-            connect();
-            // set the query
-            MySqlCommand insertCmd = new MySqlCommand(sqlCommand, _connention);
-            // execute the query
-            insertCmd.ExecuteNonQuery();
-            // close the connection
-            _connention.Close();
+            try
+            {
+                // set the query
+                MySqlCommand insertCmd = new MySqlCommand(sqlCommand, _connention);
+                // execute the query
+                insertCmd.ExecuteNonQuery();
+            }
+            catch(MySqlException)
+            {
+                MessageBox.Show("MySqlCommand Error");
+            }
         }
 
         /// <summary>
@@ -81,26 +83,50 @@ namespace MusicWord.Models
         /// </summary>
         /// <param name="category"></param>
         /// <returns> Icategory interface that represents a category model whose name will 
+        /// be used as a word to guess </returns>
+        public ICategory getWord(string category)
+        {
+            ICategory answer = null;
+            while(answer == null)
+            {
+                answer = getCategoryInstance(category);
+            }
+            return answer;
+        }
+
+        /// <summary>
+        /// helper function to get the word that should be guessed in the game
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns> Icategory interface that represents a category model whose name will 
         /// be used as a word to guess
         /// </returns>
-        public static ICategory getWord(string category)
+        public  ICategory getCategoryInstance(string category)
         {
             // the player instace
             PlayerModel player = PlayerModel.Instance;
-            // use this class instance
-            Instance();
-            // connect to the database
-            connect();
 
             // the query to send to the database
             string sqlQuery = $"SELECT * FROM musicword.{category} ORDER BY RAND() LIMIT 1;";
 
-            MySqlDataAdapter dataAdapter = new MySqlDataAdapter();
-            // set the query
-            MySqlCommand queryCmd = new MySqlCommand(sqlQuery, _connention);
+            MySqlDataReader reader = null;
+            try
+            {
+                // set the query
+                MySqlCommand queryCmd = new MySqlCommand(sqlQuery, _connention);
+                // get the object that reads the query output
+                reader = queryCmd.ExecuteReader();
+                if (reader == null)
+                {
+                    return getCategoryInstance(category);
+                }
 
-            // get the object that reads the query output
-            var reader = queryCmd.ExecuteReader();
+            }
+            catch (MySqlException)
+            {
+                MessageBox.Show("MySqlCommand Error");
+            }
+            
             string answer = null;
             ICategory resCategory = null;
             // if the query has results
@@ -113,23 +139,46 @@ namespace MusicWord.Models
                 {
                     case "albums":
                         // in this case the answer - album name is in the third column 
-                        answer = reader.GetString(2);
-                        // create a new album model
-                        resCategory = new AlbumModel(reader.GetInt64(0),
-                            answer, reader.GetInt16(1), reader.GetInt64(3));
+                        try
+                        {
+                            answer = reader.GetString(2);
+                            // create a new album model
+                            resCategory = new AlbumModel(reader.GetInt64(0),
+                                answer, reader.GetInt16(1), reader.GetInt64(3));
+                        }
+                        catch (SqlNullValueException e)
+                        {
+                            answer = null;
+                        }
+                        
                         break;
                     case "songs":
-                        // in this case the answer - song name is in the second column
-                        answer = reader.GetString(1);
-                        // create a new album model
-                        resCategory = new SongModel(reader.GetInt64(0),
-                            answer, reader.GetInt64(2), reader.GetInt64(3));
+                        try
+                        {
+                            // in this case the answer - song name is in the second column
+                            answer = reader.GetString(1);
+                            // create a new album model
+                            resCategory = new SongModel(reader.GetInt64(0),
+                                answer, reader.GetInt64(2), reader.GetInt64(3));
+                        }
+                        catch (SqlNullValueException e)
+                        {
+                            answer = null;
+                        }
+                       
                         break;
                     case "artists":
-                        // in this case the answer - artist name is in the second column
-                        answer = reader.GetString(1);
-                        // create a new artist model
-                        resCategory = new ArtistModel(reader.GetInt64(0), answer, reader.GetString(4));
+                        try
+                        {
+                            // in this case the answer - artist name is in the second column
+                            answer = reader.GetString(1);
+                            // create a new artist model
+                            resCategory = new ArtistModel(reader.GetInt64(0), answer, reader.GetString(4));
+                        }
+                        catch (SqlNullValueException e)
+                        {
+                            answer = null;
+                        }
                         break;
                     default:
                         break;
@@ -143,12 +192,12 @@ namespace MusicWord.Models
             // if the word was already asked, call this function again
             if (!player.isInSet(answer))
             {
-                _connention.Close();
-                return getWord(sqlQuery);
+                // _connention.Close();
+                reader.Close();
+                return getCategoryInstance(sqlQuery);
             }
-            // close readr and connection
+            // close reader and connection
             reader.Close();
-            _connention.Close();
             // return the category model
             return resCategory;
         }
@@ -159,18 +208,27 @@ namespace MusicWord.Models
         /// <param name="connectionString"></param>
         /// <param name="sqlQuery"></param>
         /// <returns> a clue as a string </returns>
-        public static string getClueString(string connectionString, string sqlQuery)
+        public string getClueString(string connectionString, string sqlQuery)
         {
-            // use this class instance
-            Instance();
-            // connect to the database
-            connect();
-            MySqlDataAdapter dataAdapter = new MySqlDataAdapter();
-            // set the query
-            MySqlCommand queryCmd = new MySqlCommand(sqlQuery, _connention);
+            MySqlDataReader reader = null;
+            try
+            {
+                // set the query
+                MySqlCommand queryCmd = new MySqlCommand(sqlQuery, _connention);
+                // get the object that reads the query output
+                reader = queryCmd.ExecuteReader();
+                if(reader == null)
+                {
+                    MessageBox.Show("hara al haolam");
+                    return getClueString(connectionString, sqlQuery);
+                }
 
-            // get the object that reads the query output
-            var reader = queryCmd.ExecuteReader();
+            }
+            catch (MySqlException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
             string answer = null;
             // if the query has results
             if (reader.HasRows)
@@ -180,20 +238,34 @@ namespace MusicWord.Models
                 // if the query result is year - convert the int to string
                 if (sqlQuery.Contains("year"))
                 {
-                    answer = reader.GetInt16(0).ToString();
+                    try
+                    {
+                        answer = reader.GetInt16(0).ToString();
+                    }
+                    catch (SqlNullValueException e)
+                    {
+                        answer = null;
+                    }
                 }
                 else
                 {
-                    answer = reader.GetString(0);
+                    try
+                    {
+                        answer = reader.GetString(0);
+                    }
+                    catch (SqlNullValueException e)
+                    {
+                        answer = null;
+                    }
                 }
             }
             // if the query returned a null result, call this function again
             if (answer == null)
             {
+                reader.Close();
                 return getClueString(connectionString, sqlQuery);
             }
-            // close connection and return answer
-            _connention.Close();
+            reader.Close();
             return answer;
         }
 
@@ -201,24 +273,33 @@ namespace MusicWord.Models
         /// function to get the score table as a list of table entries
         /// </summary>
         /// <returns></returns>
-        public static List<TableEntry> getScoreTable()
+        public  List<TableEntry> getScoreTable()
         {
             // get the player singleton
             PlayerModel player = PlayerModel.Instance;
             // the current category
             string category = player.Category;
-            // use this class instance
-            Instance();
-            // connect to the database
-            connect();
             // set the "top-limit" value of the table (for example top-5 players)
             int limit = 10;
-            // set the query
-            MySqlCommand topPalyersCmd = new MySqlCommand($"SELECT Name, Category, Score FROM " +
-                $"players WHERE Category='{category}' ORDER BY score Desc Limit " + limit, _connention);
 
-            // get the object that reads the query output
-            var reader = topPalyersCmd.ExecuteReader();
+            MySqlDataReader reader = null;
+            try
+            {
+                // set the query
+                MySqlCommand topPalyersCmd = new MySqlCommand($"SELECT Name, Category, Score FROM " +
+                    $"players WHERE Category='{category}' ORDER BY score Desc Limit " + limit, _connention);
+                // get the object that reads the query output
+                reader = topPalyersCmd.ExecuteReader();
+                if (reader == null)
+                {
+                    return getScoreTable();
+                }
+
+            }
+            catch (MySqlException)
+            {
+                MessageBox.Show("MySqlCommand Error");
+            }
             // create a new score table as a list of table entries
             List<TableEntry> scoreTable = new List<TableEntry>();
 
@@ -241,18 +322,17 @@ namespace MusicWord.Models
             {
                 Console.WriteLine("No rows found.");
             }
-            // close reader and connecion and return the table 
+            // close reader and return the table 
             reader.Close();
-            _connention.Close();
             return scoreTable;
         }
         /// <summary>
         /// function to close the connection
         /// </summary>
-        public static void closeConnection()
+        public  void closeConnection()
         {
+
             _connention.Close();
         }
-
     }
 }

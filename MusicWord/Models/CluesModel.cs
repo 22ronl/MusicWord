@@ -60,7 +60,7 @@ namespace MusicWord.Models
             string query = _queries_map[category][index];
             string newQuery = toReplace(category, query);
             string connectionString =Globals.connectionString;
-            string query_answer = SQLServerModel.getClueString(connectionString, newQuery);
+            string query_answer = SQLServerModel.Instance.getClueString(connectionString, newQuery);
             if (query_answer == null)
             {
                 return getClue();

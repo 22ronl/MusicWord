@@ -14,7 +14,7 @@ namespace MusicWord.ViewModels
 		/// </summary>
 		public LevelThreeViewModel()
         {
-			ICategory category = SQLServerModel.getWord(PlayerModel.Instance.Category);
+			ICategory category = SQLServerModel.Instance.getWord(PlayerModel.Instance.Category);
 			_cluesGenrator = new CluesModel(category);
 			string word = category.Name;
 			_timer = new TimeModel(Globals.levelTime);

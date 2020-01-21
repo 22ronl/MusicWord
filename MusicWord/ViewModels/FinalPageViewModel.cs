@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using MusicWord.Models;
 namespace MusicWord.ViewModels
 {
     /// <summary>
@@ -14,10 +14,14 @@ namespace MusicWord.ViewModels
         public void PlayAgain()
         {
             ShellViewModel.Instance.playAgain();
+            // close and open new connection
+            SQLServerModel.Instance.closeConnection();
+            SQLServerModel.Instance.connect();
             NextScreen();
         }
         public void EndGame()
         {
+            SQLServerModel.Instance.closeConnection();
             System.Windows.Application.Current.Shutdown();
 
         }

@@ -23,7 +23,7 @@ namespace MusicWord.ViewModels
         // init score table collection from the score table list in the SQLServerModel
         public ScoreTableViewModel()
         {
-            ScoreTable = new BindableCollection<TableEntry>(SQLServerModel.getScoreTable());
+            ScoreTable = new BindableCollection<TableEntry>(SQLServerModel.Instance.getScoreTable());
         }
         /// <summary>
         /// function that makes the game move to the next window

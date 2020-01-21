@@ -23,7 +23,7 @@ namespace MusicWord.ViewModels
 		public LevelOneViewModel()
 		{
 			// get the hidden word
-			ICategory category = SQLServerModel.getWord(PlayerModel.Instance.Category);
+			ICategory category = SQLServerModel.Instance.getWord(PlayerModel.Instance.Category);
 			_cluesGenrator = new CluesModel(category);
 			string word = category.Name;
 			// register for time notifications 

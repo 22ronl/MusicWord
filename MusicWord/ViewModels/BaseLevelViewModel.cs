@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using MusicWord.Models;
@@ -98,10 +99,16 @@ namespace MusicWord.ViewModels
 				NotifyOfPropertyChange(() => Clue);
 			}
 		}
+		public static void ThreadProc(BaseLevelViewModel baseLevelViewModel)
+		{
+			baseLevelViewModel.Clue = baseLevelViewModel._cluesGenrator.getClue();	
+		}
+
 		protected void getClue()
 		{
-			string clue = _cluesGenrator.getClue();
-			Clue = clue;
+			// run the clue on a differnt Thread so the gui will no get stack
+			Thread t = new Thread(() => ThreadProc(this));
+			t.Start();
 		}
 		///<summary>
 		///clock on button getClure generate clue if the player has not
