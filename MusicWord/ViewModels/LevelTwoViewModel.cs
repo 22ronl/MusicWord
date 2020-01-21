@@ -64,11 +64,11 @@ namespace MusicWord.ViewModels
             }
             return symbols;
         }
+        /// <summary>
+        /// Check if the letter is correct and hide one symobl from the screen
+        /// </summary>
         public override void CheckLetter()
         {
-            /// <summary>
-            /// Check if the letter is correct and hide one symobl from the screen
-            /// </summary>
             bool toEmpty = false;
             if(!String.IsNullOrEmpty(LetterGuess))
             {

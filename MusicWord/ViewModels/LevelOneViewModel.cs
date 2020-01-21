@@ -37,12 +37,11 @@ namespace MusicWord.ViewModels
 			_game.start();
 			baseBuilder(_game, score,word);
 		}
-
+		///<summary>
+		///Update view on changes in the game
+		///</summary>
 		public override void _game_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
-			///<summary>
-			///Update view on changes in the game
-			///</summary>
 			if (e.PropertyName == Globals.hiddenWord)
 			{
 				HiddenWord = _game.HiddenWord;

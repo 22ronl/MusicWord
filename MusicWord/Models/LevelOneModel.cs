@@ -19,24 +19,22 @@ namespace MusicWord.Models
 		{
 			_wordLetters = getWordLetters(word.ToLower());
 		}
-
+		///<summary>
+		///see if the player guessed all the letters of the word
+		///</summary>
 		private bool isSolved()
 		{
-			///<summary>
-			///see if the player guessed all the letters of the word
-			///</summary>
 			foreach (var letter in this._wordLetters)
 				if (!this._guesses.Contains(Char.ToLower(letter)))
 					return false;
 			return true;
 		}
-
+		///<summary>
+		///Take the player letter guess, update the list of guesses,
+		///check if player got all letters of the word.
+		///</summary>
 		public void EnterGuess(string guess)
 		{
-			///<summary>
-			///Take the player letter guess, update the list of guesses,
-			///check if player got all letters of the word.
-			///</summary>
 			try
 			{
 				// check if input is valid
@@ -64,11 +62,11 @@ namespace MusicWord.Models
 			base.start();
 			updateGuessesString();
 		}
+		///<summary>
+		///Update the list of gueesed letters that the player sees
+		///</summary>
 		private void updateGuessesString()
 		{
-			///<summary>
-			///Update the list of gueesed letters that the player sees
-			///</summary>
 			string guesses = "";
 			foreach (var letter in _guesses)
 			{

@@ -44,11 +44,12 @@ namespace MusicWord.Models
 		{
 			gameOver();
 		}
+
+		///<summary>
+		///Get a string and return a new string with same letters in different oreder
+		///</summary>
 		protected string shuffle(string str)
 		{
-			///<summary>
-			///Get a string and return a new string with same letters in different oreder
-			///</summary>
 			char[] array = str.ToCharArray();
 			Random rng = new Random();
 			int n = array.Length;
@@ -62,11 +63,12 @@ namespace MusicWord.Models
 			}
 			return new String(array);
 		}
+		///<summary>
+		///Rturn a hashset of all the string english letters
+		///</summary>
 		protected HashSet<char> getWordLetters(string word)
 		{
-			///<summary>
-			///Rturn a hashset of all the string english letters
-			///</summary>
+
 			var letters = new HashSet<char>();
 			foreach (var letter in word)
 				if (Char.IsLetter(letter))
@@ -75,13 +77,12 @@ namespace MusicWord.Models
 				}
 			return letters;
 		}
-
+		///<summary>
+		///Create hashset of the letters from the hidden word,
+		///that will be showen to the player
+		///</summary>
 		protected HashSet<char> creatDeafultGuesses(string word)
 		{
-			///<summary>
-			///Create hashset of the letters from the hidden word,
-			///that will be showen to the player
-			///</summary>
 			var letters = new HashSet<char>();
 			var showenLetters = new HashSet<char>();
 			int numOfShowenLetters;
@@ -105,11 +106,11 @@ namespace MusicWord.Models
 			return showenLetters;
 
 		}
+		///<summary>
+		///Upstae the string that the player sees depends on his letter guesses
+		///</summary>
 		protected void updateHiddenWord()
 		{
-			///<summary>
-			///Upstae the string that the player sees depends on his letter guesses
-			///</summary>
 			string wordString = "";
 			foreach (var letter in this._word)
 			{
@@ -127,25 +128,23 @@ namespace MusicWord.Models
 		{
 			updateHiddenWord();
 		}
-
+		///<summary>
+		///Check if the player word guess is correct if yes finish the game
+		///</summary>
 		public void EnterWord(string word)
 		{
-			///<summary>
-			///Check if the player word guess is correct if yes finish the game
-			///</summary>
 			if (word.ToLower() == this._word.ToLower())
 			{
 				Score += Globals.wordScore;
 				gameOver();
 			}
 		}
-			
+		///<summary>
+		///In event taht the game is over update the score; stop the timer
+		///and notify listners
+		///</summary>	
 		protected void gameOver()
 		{
-			///<summary>
-			///In event taht the game is over update the score; stop the timer
-			///and notify listners
-			///</summary>
 			Score += _timer.Secondes * Globals.secondsScore;
 			PlayerModel.Instance.Score = Score;
 			_timer.stop();
