@@ -6,28 +6,49 @@ using System.Threading.Tasks;
 using MusicWord.Models;
 namespace MusicWord.ViewModels
 {
-    class ScoreViewModel: AppScreen
+    /// <summary>
+    /// <c>ScoreViewModel</c>
+    /// the score viewModel
+    /// </summary>
+    class ScoreViewModel : AppScreen
     {
-		private int _score;
+        // score member
+        private int _score;
+        /// <summary>
+        /// constructor
+        /// </summary>
 		public ScoreViewModel()
 		{
-			Score = PlayerModel.Instance.Score;
+            // get the current score from the player
+            Score = PlayerModel.Instance.Score;
+            // set the hidden word string
 			HiddenWord = Globals.hiddenWordText + PlayerModel.Instance.lastWord;
 		}
+        /// <summary>
+        /// Score property
+        /// </summary>
 		public int  Score
 		{
 			get { return _score; }
 			set 
-			{ 
-				_score = value;
+			{
+                // set the score member
+                _score = value;
+                // notify property change
 				NotifyOfPropertyChange(() => Score);
 			}
 		}
+        /// <summary>
+        /// function that makes the game move to the next window
+        /// </summary>
 		public void Next()
 		{
 			NextScreen();
 		}
 
+        /// <summary>
+        /// HiddenWord proprety
+        /// </summary>
 		public string HiddenWord { get; set; }
 
 	}
