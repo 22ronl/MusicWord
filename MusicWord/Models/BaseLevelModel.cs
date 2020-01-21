@@ -9,6 +9,9 @@ namespace MusicWord.Models
 {
     class BaseLevelModel: PropertyChangedBase
 	{
+		/// <summary>Class <c>BaseLevelModel</c>
+		/// Contains the basic logic and functionality of the game
+		/// </summary>
 		public event EventHandler GameOver;
 		protected double _percentage;
 		protected HashSet<char> _guesses;
@@ -41,6 +44,10 @@ namespace MusicWord.Models
 		{
 			gameOver();
 		}
+
+		///<summary>
+		///Get a string and return a new string with same letters in different oreder
+		///</summary>
 		protected string shuffle(string str)
 		{
 			char[] array = str.ToCharArray();
@@ -56,8 +63,12 @@ namespace MusicWord.Models
 			}
 			return new String(array);
 		}
+		///<summary>
+		///Rturn a hashset of all the string english letters
+		///</summary>
 		protected HashSet<char> getWordLetters(string word)
 		{
+
 			var letters = new HashSet<char>();
 			foreach (var letter in word)
 				if (Char.IsLetter(letter))
@@ -66,7 +77,10 @@ namespace MusicWord.Models
 				}
 			return letters;
 		}
-
+		///<summary>
+		///Create hashset of the letters from the hidden word,
+		///that will be showen to the player
+		///</summary>
 		protected HashSet<char> creatDeafultGuesses(string word)
 		{
 			var letters = new HashSet<char>();
@@ -92,6 +106,9 @@ namespace MusicWord.Models
 			return showenLetters;
 
 		}
+		///<summary>
+		///Upstae the string that the player sees depends on his letter guesses
+		///</summary>
 		protected void updateHiddenWord()
 		{
 			string wordString = "";
@@ -111,7 +128,9 @@ namespace MusicWord.Models
 		{
 			updateHiddenWord();
 		}
-
+		///<summary>
+		///Check if the player word guess is correct if yes finish the game
+		///</summary>
 		public void EnterWord(string word)
 		{
 			if (word.ToLower() == this._word.ToLower())
@@ -120,7 +139,10 @@ namespace MusicWord.Models
 				gameOver();
 			}
 		}
-			
+		///<summary>
+		///In event taht the game is over update the score; stop the timer
+		///and notify listners
+		///</summary>	
 		protected void gameOver()
 		{
 			Score += _timer.Secondes * Globals.secondsScore;

@@ -8,6 +8,9 @@ using System.Windows;
 using MusicWord.Models;
 namespace MusicWord.ViewModels
 {
+    /// <summary>
+    ///  Class <c>WelcomeViewModel</c> responsible the Start buttom.
+    /// </summary>
     public class WelcomeViewModel : AppScreen
 	{
 		private string _name ;
@@ -17,11 +20,9 @@ namespace MusicWord.ViewModels
 			get { return _name; }
 			set { _name = value; }
 		}
-		public void Start()
+        /// <summary>method <c>Start</c> when clicking Start buttom the method creates the player instance and insetrs i's name</summary>
+        public void Start()
 		{
-			///<summary>
-			///
-			///</summary>
 			if (!string.IsNullOrEmpty(PlayerName))
 			{
                 PlayerModel newPlayer = PlayerModel.Instance;

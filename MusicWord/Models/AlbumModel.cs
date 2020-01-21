@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-/// <summary>
 
-/// </summary>
 namespace MusicWord.Models
 {
+    /// <summary>
+    /// Class <c>AlbumModel</c> implemnts ICategory, and holds the albums informaion
+    /// exatrct from data base.
+    /// </summary>
     class AlbumModel : ICategory
     {
         public Int64 Id { get; set; }

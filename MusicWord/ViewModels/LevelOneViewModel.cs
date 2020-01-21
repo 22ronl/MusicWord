@@ -12,17 +12,24 @@ namespace MusicWord.ViewModels
 {
 	class LevelOneViewModel : BaseLevelViewModel
 	{
+		/// <summary>Class <c>BaseLevelViewModel</c>
+		/// Create the game calss with needed parameters
+		/// adding guesses letters functionality for the player
+		/// </summary>
 
 		protected string _letterGuess;
 		protected string _guesses;
 		protected LevelOneModel _game;
 		public LevelOneViewModel()
 		{
+			// get the hidden word
 			ICategory category = SQLServerModel.getWord(PlayerModel.Instance.Category);
 			_cluesGenrator = new CluesModel(category);
 			string word = category.Name;
+			// register for time notifications 
 			_timer = new TimeModel(Globals.levelTime);
 			_timer.PropertyChanged += _timer_PropertyChanged;
+			// create game with current plater score
 			int score = PlayerModel.Instance.Score;
 			_game = new LevelOneModel(word, _timer, Globals.hidddenPercentage,score);
 			_game.PropertyChanged += _game_PropertyChanged;
@@ -30,7 +37,9 @@ namespace MusicWord.ViewModels
 			_game.start();
 			baseBuilder(_game, score,word);
 		}
-
+		///<summary>
+		///Update view on changes in the game
+		///</summary>
 		public override void _game_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
 			if (e.PropertyName == Globals.hiddenWord)

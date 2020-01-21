@@ -10,6 +10,9 @@ namespace MusicWord.ViewModels
 {
     class BaseLevelViewModel : AppScreen
     {
+		/// <summary>Class <c>BaseLevelViewModel</c>
+		/// resplobsiable for all the base propeties and view functionaltiy of the game levels
+		/// </summary>
 		protected int _score;
 		protected string _guessWord;
 		protected string _time;
@@ -19,9 +22,10 @@ namespace MusicWord.ViewModels
 		protected CluesModel _cluesGenrator;
 		protected string _clue;
 		protected int _numOfClues;
-		public BaseLevelViewModel()
-		{
-		}
+		public BaseLevelViewModel() { }
+		///<summary>
+		///Update class memeber after class creation
+		///</summary>
 		protected void baseBuilder(BaseLevelModel game, int score, string word)
 		{
 			Score = score;
@@ -31,12 +35,17 @@ namespace MusicWord.ViewModels
 			_numOfClues = 0;
 		}
 
-
+		///<summary>
+		///In event that the game notifies that game is over mover to the next game screen
+		///</summary>
 		protected void _game_GameOver(object sender, EventArgs e)
 		{
 			NextScreen();
 		}
 
+		///<summary>
+		///Update view on changes in the game
+		///</summary>
 		public virtual void _game_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
 			if (e.PropertyName == Globals.hiddenWord)
@@ -50,6 +59,9 @@ namespace MusicWord.ViewModels
 			}
 		}
 
+		///<summary>
+		///Update the view on time changes
+		///</summary>
 		protected void _timer_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
 			PropertyInfo property = sender.GetType().GetProperty(e.PropertyName);
@@ -91,9 +103,13 @@ namespace MusicWord.ViewModels
 			string clue = _cluesGenrator.getClue();
 			Clue = clue;
 		}
+		///<summary>
+		///clock on button getClure generate clue if the player has not
+		///reached the capcity of clues allowed
+		///</summary>
 		public virtual void GetClue()
 		{
-			if(_numOfClues < Globals.maxCluesBase)
+			if (_numOfClues < Globals.maxCluesBase)
 			{
 				getClue();
 				_numOfClues++;
@@ -103,6 +119,9 @@ namespace MusicWord.ViewModels
 				Clue = Globals.noClues;
 			}
 		}
+		///<summary>
+		///Cheat method to display  the hidden word on screen
+		///</summary>
 		public void Cheat()
 		{
 			GuessWord = PlayerModel.Instance.lastWord;
@@ -138,7 +157,6 @@ namespace MusicWord.ViewModels
 				NotifyOfPropertyChange(() => Score);
 			}
 		}
-
 		public string Category { get; set; }
 
 	}
