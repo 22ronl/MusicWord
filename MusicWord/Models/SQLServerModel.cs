@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using MySql.Data.MySqlClient;
@@ -14,6 +15,7 @@ namespace MusicWord.Models
     /// </summary>
     class SQLServerModel
     {
+        private static Mutex mut = new Mutex();
         // coonection object to the database
         private MySqlConnection _connention;
         // the singleton instance member
@@ -210,6 +212,7 @@ namespace MusicWord.Models
         /// <returns> a clue as a string </returns>
         public string getClueString(string connectionString, string sqlQuery)
         {
+            mut.WaitOne();
             MySqlDataReader reader = null;
             try
             {
@@ -219,7 +222,7 @@ namespace MusicWord.Models
                 reader = queryCmd.ExecuteReader();
                 if(reader == null)
                 {
-                    MessageBox.Show("hara al haolam");
+                    mut.ReleaseMutex();
                     return getClueString(connectionString, sqlQuery);
                 }
 
@@ -263,9 +266,11 @@ namespace MusicWord.Models
             if (answer == null)
             {
                 reader.Close();
+                mut.ReleaseMutex();
                 return getClueString(connectionString, sqlQuery);
             }
             reader.Close();
+            mut.ReleaseMutex();
             return answer;
         }
 
