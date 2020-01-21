@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace MusicWord.Models
 {
+    /// <summary>
+    /// Class <c>ArtistModel</c> implemnts ICategory, and holds the artists informaion
+    /// exatrct from data base.
+    /// </summary>
     class ArtistModel : ICategory
     {
         public ArtistModel(Int64 id, string name, string country)

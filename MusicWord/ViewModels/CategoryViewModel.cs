@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using MusicWord.Models;
 namespace MusicWord.ViewModels
 {
+    /// <summary>
+    ///  Class <c>CategoryViewModel</c> responsible on initialize the player category choise.
+    /// </summary>
     class CategoryViewModel :AppScreen 
     {
         private void OnCategory(string category)
