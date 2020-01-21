@@ -10,7 +10,9 @@ namespace MusicWord.ViewModels
 {
     public class AppScreen : Screen
     {
-
+        /// <summary>Class <c>AppScreen</c>
+        /// enables to get the next screen of the game using ShellViewModel
+        /// </summary>
         public void NextScreen()
         {
             var screen = ShellViewModel.Instance.getNextScreen();
@@ -26,12 +28,19 @@ namespace MusicWord.ViewModels
    
     public class ShellViewModel : Conductor<Screen>.Collection.OneActive, IShell
     {
+        /// <summary>Class <c>ShellViewModel</c>
+        /// singelton,
+        /// Responsibale for ViewModels order of the application,
+        /// helping switching netween users control easily
+        /// and start a new game
+        /// </summary>
         public delegate Screen GetScreen();
         private static ShellViewModel _instance;
         private Queue<GetScreen> _screens;
         private List<GetScreen> _levels;
         private void createGameScreens()
         {
+            // list of delgates to be created only when needed
             _levels = new List<GetScreen> { ()=> new CategoryViewModel() , ()=> new InstructionsGuideViewModel(),
                 () => new LevelOneViewModel() , ()=> new ScoreViewModel(), 
                 () => new LevelTwoViewModel(Globals.maxClues, Globals.maxLetterGuesses), ()=> new ScoreViewModel(),
@@ -49,6 +58,9 @@ namespace MusicWord.ViewModels
             }
             return null;
         }
+        /// <summary>
+        /// reset the score of the player and the screens queue
+        /// </summary>
         public void playAgain()
         {
             _screens = new Queue<GetScreen>(_levels);
@@ -57,6 +69,7 @@ namespace MusicWord.ViewModels
         public ShellViewModel()
         {
             createGameScreens();
+            // show WelocmeWindow
             this.ActivateItem(new WelcomeViewModel());
         }
         public static ShellViewModel Instance
