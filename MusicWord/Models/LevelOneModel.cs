@@ -10,6 +10,9 @@ namespace MusicWord.Models
 {
 	internal class LevelOneModel : BaseLevelModel
 	{
+		/// <summary>Class <c>LevelOneModel</c>
+		/// Contains the logic and functionality of the first and seconed level of the game
+		/// </summary>
 		private string _guessesString;
 		private HashSet<char> _wordLetters;
 		public LevelOneModel(string word, TimeModel timer, double percentage, int score) : base(word, timer,percentage,score)
@@ -19,6 +22,9 @@ namespace MusicWord.Models
 
 		private bool isSolved()
 		{
+			///<summary>
+			///see if the player guessed all the letters of the word
+			///</summary>
 			foreach (var letter in this._wordLetters)
 				if (!this._guesses.Contains(Char.ToLower(letter)))
 					return false;
@@ -27,6 +33,10 @@ namespace MusicWord.Models
 
 		public void EnterGuess(string guess)
 		{
+			///<summary>
+			///Take the player letter guess, update the list of guesses,
+			///check if player got all letters of the word.
+			///</summary>
 			try
 			{
 				// check if input is valid
@@ -36,7 +46,7 @@ namespace MusicWord.Models
 					char lower = Char.ToLower(letter);
 					if (_wordLetters.Contains(lower) && !_guesses.Contains(lower))
 						Score += Globals.letterScore;
-					// add to guess the new letter and print the word
+					// add to guess the new letter and print the update the hidde word
 					this._guesses.Add(lower);
 					updateHiddenWord();
 					updateGuessesString();
@@ -44,7 +54,7 @@ namespace MusicWord.Models
 						gameOver();
 				}
 			}
-			// if there is an exception the input is not valid we ignore it
+			// if there is an exception the input is invalid, we ignore it
 			catch (ArgumentNullException) { }
 			catch (FormatException) { }
 		}
@@ -56,6 +66,9 @@ namespace MusicWord.Models
 		}
 		private void updateGuessesString()
 		{
+			///<summary>
+			///Update the list of gueesed letters that the player sees
+			///</summary>
 			string guesses = "";
 			foreach (var letter in _guesses)
 			{
